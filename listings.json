@@ -1,0 +1,74 @@
+[
+  {
+    "id": "1770614171070",
+    "title": "Auria Residences",
+    "description": "Where living close to the city center does not need to with hassle or noise and congestion.",
+    "location": "Nivel Hills, Veterans Drive, Brgy. Lahug, Cebu City",
+    "locationDetails": "Auria Residences Lahug is nestled in the picturesque uphill location in Nivel Hills, Cebu City. It is a mixed-use condo development set to redefine urban living with its stunning blend of modern design and breathtaking panoramic views.",
+    "beds": 1,
+    "baths": 1,
+    "mainImage": "auria.jpg",
+    "gallery": [
+      "bedroom.jpg",
+      "bathroom.jpg",
+      "livingroom.jpg",
+      "kitchen.jpg",
+      "diningroom.jpg"
+    ],
+    "amenities": [
+      "Infinity Pool",
+      "100% Back-up Power",
+      "6 elevators",
+      "CCTV",
+      "WiFi"
+    ],
+    "pricing": [
+      {
+        "title": "STUDIO UNIT - 22.1 sqm",
+        "type": "East Mandaue/City View",
+        "items": [
+          "Total Selling Price: ₱4,381,104",
+          "Reservation Fee: ₱20,000",
+          "15% Downpayment payable in 60 months: ₱8,000/month",
+          "85% Balance payable through bank financing"
+        ]
+      },
+      {
+        "title": "1BR UNIT - 45.27 sqm",
+        "type": "West/Mountain View",
+        "items": [
+          "Total Selling Price: ₱8,264,491",
+          "Reservation Fee: ₱20,000",
+          "15% Downpayment payable in 60 months: ₱22,600/month",
+          "85% Balance payable through bank financing"
+        ]
+      },
+      {
+        "title": "2BR UNIT - 66.52 sqm",
+        "type": "South West/Corner Mountain View & City View",
+        "items": [
+          "Total Selling Price: ₱12,814,412",
+          "Reservation Fee: ₱20,000",
+          "15% Downpayment payable in 60 months: ₱35,000/month",
+          "85% Balance payable through bank financing"
+        ]
+      }
+    ],
+    "locations": [
+      "340 m Marco Polo Plaza Cebu",
+      "760 m Mercedes-Benz Cebu",
+      "1.4 km Camp Lapu-Lapu Station Hospital",
+      "1.5 km JY Square Mall",
+      "1.87 km University of Southern Philippines Foundation",
+      "1.9 km Cebu IT Park",
+      "2.4 km University of the Philippines Cebu",
+      "2.5 km Waterfront Hotel & Casino Cebu City",
+      "2.9 km Cebu Business Park",
+      "2.9 km Ayala Center Cebu",
+      "3.6 km Temple of Leah",
+      "3.8 km TOPS Cebu",
+      "6.2 km Cebu City Link Expressway Bridge",
+      "9.8 km Mactan Cebu International Airport"
+    ]
+  }
+]
