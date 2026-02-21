@@ -12,16 +12,14 @@ const server = http.createServer(app);
 
 // ── CORS: allow Netlify frontend + local dev ──────────────────────────────────
 const ALLOWED_ORIGINS = [
-  'https://athenilynnweb.netlify.app',
-  process.env.FRONTEND_URL,
+  'https://athenilynnweb.netlify.app',    // ← Add this explicitly
+  process.env.FRONTEND_URL || 'https://athenilynnweb.netlify.app',  // Fallback
   'http://localhost:3000',
   'http://localhost:5500',
   'http://127.0.0.1:5500',
 ].filter(Boolean);
 
-const io = socketIo(server, {
-  cors: { origin: ALLOWED_ORIGINS, methods: ['GET', 'POST'] }
-});
+console.log('✅ CORS Allowed Origins:', ALLOWED_ORIGINS);  // Debug log
 
 app.use((req, res, next) => {
   const origin = req.headers.origin;
