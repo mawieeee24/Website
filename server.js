@@ -11,24 +11,29 @@ const app = express();
 const server = http.createServer(app);
 
 // ── CORS: allow Netlify frontend + local dev ──────────────────────────────────
-const ALLOWED_ORIGINS = [
-  'https://athenilynnweb.netlify.app',    // ← Add this explicitly
-  process.env.FRONTEND_URL || 'https://athenilynnweb.netlify.app',  // Fallback
-  'http://localhost:3000',
-  'http://localhost:5500',
-  'http://127.0.0.1:5500',
-].filter(Boolean);
-
-console.log('✅ CORS Allowed Origins:', ALLOWED_ORIGINS);  // Debug log
-
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (!origin || ALLOWED_ORIGINS.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin || '*');
+  
+  // Allow requests from Netlify and localhost
+  const allowedOrigins = [
+    'https://athenilynnweb.netlify.app',
+    'http://localhost:3000',
+    'http://localhost:5500',
+    'http://127.0.0.1:5500',
+  ];
+  
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
   }
+  
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,x-admin-token');
-  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  res.setHeader('Access-Control-Max-Age', '86400');
+  
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  
   next();
 });
 
