@@ -10,26 +10,39 @@ const { Pool } = require('pg');
 const app = express();
 const server = http.createServer(app);
 
-// ── CORS: allow Netlify frontend + local dev ──────────────────────────────────
+// ── CORS CONFIGURATION ────────────────────────────────────────────────────────
+const ALLOWED_ORIGINS = [
+  'https://athenilynnweb.netlify.app',
+  'http://localhost:3000',
+  'http://localhost:5500',
+  'http://127.0.0.1:5500',
+];
+
+console.log('✅ CORS Allowed Origins:', ALLOWED_ORIGINS);
+
+const io = socketIo(server, {
+  cors: { 
+    origin: ALLOWED_ORIGINS, 
+    methods: ['GET', 'POST'],
+    credentials: true
+  }
+});
+
+// ── CORS MIDDLEWARE ──────────────────────────────────────────────────────────
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   
-  // Allow requests from Netlify and localhost
-  const allowedOrigins = [
-    'https://athenilynnweb.netlify.app',
-    'http://localhost:3000',
-    'http://localhost:5500',
-    'http://127.0.0.1:5500',
-  ];
-  
-  if (allowedOrigins.includes(origin)) {
+  // Always allow from Netlify and localhost
+  if (ALLOWED_ORIGINS.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
   
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,x-admin-token');
   res.setHeader('Access-Control-Max-Age', '86400');
   
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
@@ -38,7 +51,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json({ limit: '50mb' }));
-app.use(express.static(path.join(__dirname)));  // serve index.html, style.css, script.js from root
+app.use(express.static(path.join(__dirname)));
 
 // ── Multer ────────────────────────────────────────────────────────────────────
 const upload = multer({
@@ -68,7 +81,7 @@ async function initDatabase() {
   try {
     pool = new Pool({
       connectionString: process.env.DATABASE_URL,
-      ssl: { rejectUnauthorized: false }  // Neon requires SSL
+      ssl: { rejectUnauthorized: false }
     });
     await pool.query('SELECT NOW()');
     console.log('✅ Connected to Neon PostgreSQL');
